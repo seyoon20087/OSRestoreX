@@ -16,13 +16,10 @@ then
     then
         ipenter
     else
-        runtask
+        echo 'When prompted please enter password "alpine" to continue.'
+        ssh -l root -p 2222 $ipaddress 'bash -s' < semierase.sh
+        exit 0
     fi
-    }
-    runtask () {
-    echo 'When prompted please enter password "alpine" to continue.'
-    ssh -l root -p 2222 $ipaddress 'bash -s' < semierase.sh
-    exit 0
     }
     ipcheck
 else
