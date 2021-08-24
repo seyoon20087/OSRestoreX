@@ -15,9 +15,15 @@ if [[ "$accept" == "y"* ]]
         umount -f /private/var
         mount -o ro /private/var
         mount -o ro /
-        cat /dev/zero > /dev/rdisk0s2
-        cat /dev/zero > /dev/rdisk0s1
-        
+        if ! dd if=/dev/zero of=/dev/rdisk0s2
+        then
+            cat /dev/zero > /dev/rdisk0s2
+        fi
+        if ! dd if=/dev/zero of=/dev/rdisk0s1
+        then
+            cat /dev/zero > /dev/rdisk0s1
+        fi
+
         echo "Your device is now erased and is restarting."
         echo "Please perform a full restore of your device via iTunes or Finder to continue using your device."
         shutdown -r now
